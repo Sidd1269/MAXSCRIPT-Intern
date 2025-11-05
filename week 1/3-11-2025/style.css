@@ -1,0 +1,59 @@
+/* *{
+    margin: 0;
+    padding: 0px;
+    box-sizing: border-box;
+}
+html , body{
+    height: 100%;
+    width: 100%;
+}
+
+
+
+.back{
+    background: HSL(207, 93%, 17%);
+background: radial-gradient(circle,rgba(3, 47, 84, 1) 32%, rgba(29, 128, 209, 1) 66%);
+    color: white;
+    margin: auto;
+    width: 80%;
+    border: 7px grey dotted;
+     border-radius: 20px;
+     padding: 20px;
+} 
+
+.my-form{
+    padding: 20px;
+    
+}
+
+.my-form .form-group{
+    padding-bottom: 15px ;
+}
+
+.my-form lable{
+    display: block;
+}
+
+.my-form input[type="text"], .my-form textarea{
+    padding: 8px;
+    width: 100% ;
+}
+
+.button{
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+} */
+
+.block{
+    float: left;
+    width: 33.3%;
+    border: 1px solid #06b5ef;
+    box-shadow: #06b5ef;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: grey;
+    border-radius: 15px;
+}
