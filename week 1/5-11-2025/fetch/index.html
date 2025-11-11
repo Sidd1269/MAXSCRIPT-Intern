@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>User Cards</title>
+    <style>
+        body {
+            background-color: #0f1113;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        #card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .card {
+            width: 300px;
+            padding: 18px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+            background: linear-gradient(180deg,#222428 0%, #1b1d20 100%);
+            color: #e6eef8;
+            transition: transform .15s ease, box-shadow .15s ease;
+        }
+        .card:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(0,0,0,0.6); }
+
+        .profile-img {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 12px;
+            border: 2px solid rgba(255,255,255,0.06);
+            object-fit: cover;
+            background: #2b2b2b;
+        }
+
+        .user-name {
+            text-align: center;
+            margin: 6px 0;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .user-info {
+            color: #bfc7d4;
+            font-size: 14px;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .user-email {
+            color: #66b3ff;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        .user-email:hover { color: #99ccff; }
+    </style>
+</head>
+<body>
+    <div id="card-container" aria-live="polite"></div>
+
+    <script>
+        // use querySelector instead of getElementById
+        const container = document.querySelector('#card-container');
+
+        async function loadUsers(count = 6) {
+            try {
+                const res = await fetch(`https://randomuser.me/api/?results=${count}`);
+                const data = await res.json();
+                data.results.forEach(user => {
+                    const card = `
+                        <div class="card">
+                            <img class="profile-img" src="${user.picture.large}" alt="Profile of ${user.name.first} ${user.name.last}">
+                            <h2 class="user-name">${user.name.first} ${user.name.last}</h2>
+                            <div class="user-info">
+                                <p>Age: ${user.dob.age} • ${user.location.city}, ${user.location.country}</p>
+                            </div>
+                            <a class="user-email" href="mailto:${user.email}">${user.email}</a>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', card);
+                });
+            } catch (err) {
+                console.error('Fetch error:', err);
+                container.insertAdjacentHTML('beforeend', `<p style="color:#f66">Failed to load users.</p>`);
+            }
+        }
+
+        // load cards
+        loadUsers(5);
+    </script>
+</body>
+</html>
